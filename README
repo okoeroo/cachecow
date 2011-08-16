@@ -1,0 +1,3 @@
+Project:    Cache Cow
+Goal:       Provide more dynamic/variable caching and buffering options.
+            It's intended to work for audio and video streams that are transmitted from or to a sub-optimal network.
