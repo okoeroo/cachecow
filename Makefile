@@ -21,6 +21,7 @@ LFLAGS = \
 BIN   =  ./bin/test
 
 OBJS  = \
+	src/callbacks.o \
 	src/main.o
 
 
