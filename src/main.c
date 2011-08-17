@@ -18,6 +18,9 @@
 #include "cc_types.h"
 #include "callbacks.h"
 
+int
+doit (int listen_port, protocol_t proto, int conn_port);
+
 
 int
 doit (int listen_port, protocol_t proto, int conn_port) {
@@ -65,6 +68,7 @@ doit (int listen_port, protocol_t proto, int conn_port) {
     event_free(signal_event);
     event_base_free(base);
 
+    return 0;
 }
 
 int

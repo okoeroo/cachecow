@@ -23,11 +23,11 @@ const char MESSAGE[] = "foo1\n";
 
 void signal_cb(evutil_socket_t sig, short events, void *user_data)
 {
-    printf("%s - begin\n", __func__);
     struct event_base *base = user_data;
     struct timeval delay = { 1, 0 };
 
-    printf("Caught an interrupt signal; exiting cleanly in two seconds.\n");
+    printf("%s - begin\n", __func__);
+    printf("Caught an interrupt signal; exiting cleanly in two seconds. Signal was: %d\n", sig);
 
     event_base_loopexit(base, &delay);
     printf("%s - end\n", __func__);
@@ -52,8 +52,9 @@ void conn_eventcb(struct bufferevent *bev, short events, void *user_data)
 
 void conn_readcb(struct bufferevent *bev, void *user_data)
 {
-    printf("%s - begin\n", __func__);
     struct evbuffer *output = bufferevent_get_output(bev);
+    printf("%s - begin\n", __func__);
+
     if (evbuffer_get_length(output) == 0) {
         printf("flushed answer\n");
         bufferevent_free(bev);
@@ -63,8 +64,8 @@ void conn_readcb(struct bufferevent *bev, void *user_data)
 
 void conn_writecb(struct bufferevent *bev, void *user_data)
 {
-    printf("%s - begin\n", __func__);
     struct evbuffer *output = bufferevent_get_output(bev);
+    printf("%s - begin\n", __func__);
     if (evbuffer_get_length(output) == 0) {
         printf("flushed answer\n");
         bufferevent_free(bev);
@@ -96,6 +97,6 @@ accept_conn_cb(struct evconnlistener *listener, evutil_socket_t fd, struct socka
 
 void
 accept_error_cb(struct evconnlistener *lis, void *ptr) {
-    printf ("%s: Error: Something is wrong");
+    printf ("%s: Error: Something is wrong", __func__);
 }
 
